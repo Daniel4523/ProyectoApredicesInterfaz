@@ -14,9 +14,23 @@ namespace ProyectoApredicesInterfaz
     public partial class Form1 : Form
     {
         private Funciones logica;
+
         public Form1()
         {
+
             InitializeComponent();
+
+            var listTextBox = new List<TextBox>();
+            listTextBox.Add(textBox1);
+            listTextBox.Add(textBox2);
+            Object[] objetos = { };
+
+            logica = new Funciones(listTextBox, objetos);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            logica.ingresar();
         }
     }
 }
