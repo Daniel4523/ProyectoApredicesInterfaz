@@ -33,14 +33,14 @@ namespace ProyectoApredicesInterfaz
             bool ingresoExitoso = logica.ingresar();
             if (ingresoExitoso)
             {
-                MessageBox.Show("Ingreso exitoso");
+                MessageBox.Show("ingreso exitoso");
                 Form2 form2 = new Form2();
                 form2.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos");
+                MessageBox.Show("usuario o contraseña incorrectos");
             }
 
         }
