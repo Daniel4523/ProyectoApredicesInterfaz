@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace ProyectoApredicesInterfaz
 {
-    public partial class Form1 : Form
+    public partial class FormPrincipal : Form
     {
         private Funciones logica;
 
-        public Form1()
+        public FormPrincipal()
         {
             InitializeComponent();
 
@@ -34,8 +34,8 @@ namespace ProyectoApredicesInterfaz
             if (ingresoExitoso)
             {
                 MessageBox.Show("ingreso dsnvosndsd.hv");
-                Form2 form2 = new Form2();
-                form2.Show();
+                FormPrincipal formAcceso = new FormPrincipal();
+                formAcceso.Show();
                 this.Hide();
             }
             else
