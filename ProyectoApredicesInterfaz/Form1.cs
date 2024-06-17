@@ -33,7 +33,7 @@ namespace ProyectoApredicesInterfaz
             bool ingresoExitoso = logica.ingresar();
             if (ingresoExitoso)
             {
-                MessageBox.Show("ingreso dsnvosndsd.");
+                MessageBox.Show("ingreso dsnvosndsd.hv");
                 Form2 form2 = new Form2();
                 form2.Show();
                 this.Hide();
