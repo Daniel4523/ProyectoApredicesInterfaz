@@ -20,7 +20,7 @@ namespace Logicas
 
             listaUsuarios = new List<(string usuario, string contraseña)>
             {
-                ("1", "1"),
+                ("12", "1"),
                 ("2", "2"),
             
             };
