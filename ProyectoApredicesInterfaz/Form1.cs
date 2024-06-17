@@ -17,12 +17,12 @@ namespace ProyectoApredicesInterfaz
 
         public Form1()
         {
-
             InitializeComponent();
 
+          
             var listTextBox = new List<TextBox>();
-            listTextBox.Add(textBox1);
-            listTextBox.Add(textBox2);
+            listTextBox.Add(textBox1); 
+            listTextBox.Add(textBox2); 
             Object[] objetos = { };
 
             logica = new Funciones(listTextBox, objetos);
@@ -30,7 +30,19 @@ namespace ProyectoApredicesInterfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            logica.ingresar();
+            bool ingresoExitoso = logica.ingresar();
+            if (ingresoExitoso)
+            {
+                MessageBox.Show("Ingreso exitoso");
+                Form2 form2 = new Form2();
+                form2.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos");
+            }
+
         }
     }
 }
