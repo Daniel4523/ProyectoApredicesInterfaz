@@ -40,7 +40,7 @@ namespace ProyectoApredicesInterfaz
             }
             else
             {
-                MessageBox.Show("usuario o contraseña incorrectos.");
+                MessageBox.Show("usuario o contrseña incorrectos.");
             }
 
         }
