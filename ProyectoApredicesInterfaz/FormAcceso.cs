@@ -44,5 +44,12 @@ namespace ProyectoApredicesInterfaz
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormRecuperacionContraseña formRecuperacionContraseña = new FormRecuperacionContraseña();
+            formRecuperacionContraseña.Show();
+            this.Hide();
+        }
     }
 }
