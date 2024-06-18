@@ -65,20 +65,19 @@ namespace Logicas
 
         public void EnviarCorreo(string destinatario, string codigo)
         {
-            string remitente = "pruebasproyectoaprendices@gmail.com"; 
-            string contraseña = "123proyecto123";
+            string remitente = "pruebasproyectoaprendices@outlook.com"; 
+            string contraseña = "123proyecto123"; 
 
             try
             {
                 MailMessage mail = new MailMessage(remitente, destinatario);
                 mail.Subject = "Código de recuperación de contraseña";
                 mail.Body = $"Tu código de recuperación es: {codigo}";
-                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                SmtpClient client = new SmtpClient("smtp.office365.com");
                 client.Port = 587;
                 client.Credentials = new NetworkCredential(remitente, contraseña);
                 client.EnableSsl = true;
 
-         
                 client.Send(mail);
             }
             catch (Exception ex)
@@ -92,7 +91,4 @@ namespace Logicas
             return codigoIngresado == codigoGenerado;
         }
     }
-
-
 }
-
