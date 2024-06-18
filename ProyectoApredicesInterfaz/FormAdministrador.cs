@@ -12,6 +12,7 @@ namespace ProyectoApredicesInterfaz
 {
     public partial class FormAdministrador : Form
     {
+        
         public FormAdministrador()
         {
             InitializeComponent();

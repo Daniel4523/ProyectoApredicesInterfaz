@@ -22,7 +22,7 @@ namespace Logicas
             {
                 ("12", "1"),
                 ("2", "2"),
-            
+                ("3","3"),
             };
         }
 
@@ -41,6 +41,7 @@ namespace Logicas
 
             return false; 
         }
+
     }
 }
 
