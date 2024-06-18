@@ -79,11 +79,11 @@
     <Compile Include="FormConfirmacionContraseña.Designer.cs">
       <DependentUpon>FormConfirmacionContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPlataformas.cs">
+    <Compile Include="FormLimpiarPlataformas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPlataformas.Designer.cs">
-      <DependentUpon>FormPlataformas.cs</DependentUpon>
+    <Compile Include="FormLimpiarPlataformas.Designer.cs">
+      <DependentUpon>FormLimpiarPlataformas.cs</DependentUpon>
     </Compile>
     <Compile Include="FormPrincipal.cs">
       <SubType>Form</SubType>
@@ -97,11 +97,11 @@
     <Compile Include="FormRecuperacionContraseña.Designer.cs">
       <DependentUpon>FormRecuperacionContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormServicios.cs">
+    <Compile Include="FormConsultarServiciosYPlataformas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormServicios.Designer.cs">
-      <DependentUpon>FormServicios.cs</DependentUpon>
+    <Compile Include="FormConsultarServiciosYPlataformas.Designer.cs">
+      <DependentUpon>FormConsultarServiciosYPlataformas.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

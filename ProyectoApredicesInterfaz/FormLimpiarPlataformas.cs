@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProyectoApredicesInterfaz
 {
-    public partial class FormServicios : Form
+    public partial class FormLimpiarPlataformas : Form
     {
-        public FormServicios()
+        public FormLimpiarPlataformas()
         {
             InitializeComponent();
         }
