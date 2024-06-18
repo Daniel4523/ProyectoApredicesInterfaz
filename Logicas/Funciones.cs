@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Logicas
 {
@@ -43,6 +47,52 @@ namespace Logicas
         }
 
 
+  
+
+        private string codigoGenerado;
+
+        public bool ValidarEmails(string email1, string email2)
+        {
+            return email1 == email2;
+        }
+
+        public string GenerarCodigo()
+        {
+            Random random = new Random();
+            codigoGenerado = random.Next(100000, 999999).ToString();
+            return codigoGenerado;
+        }
+
+        public void EnviarCorreo(string destinatario, string codigo)
+        {
+            string remitente = "pruebasproyectoaprendices@gmail.com"; 
+            string contraseña = "123proyecto123";
+
+            try
+            {
+                MailMessage mail = new MailMessage(remitente, destinatario);
+                mail.Subject = "Código de recuperación de contraseña";
+                mail.Body = $"Tu código de recuperación es: {codigo}";
+                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                client.Port = 587;
+                client.Credentials = new NetworkCredential(remitente, contraseña);
+                client.EnableSsl = true;
+
+         
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al enviar el correo: {ex.Message}");
+            }
+        }
+
+        public bool VerificarCodigo(string codigoIngresado)
+        {
+            return codigoIngresado == codigoGenerado;
+        }
     }
+
+
 }
 
