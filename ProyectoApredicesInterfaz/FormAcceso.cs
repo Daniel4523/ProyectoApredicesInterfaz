@@ -33,9 +33,9 @@ namespace ProyectoApredicesInterfaz
             bool ingresoExitoso = logica.ingresar();
             if (ingresoExitoso)
             {
-                MessageBox.Show("ingreso dsnvosndsd.hv");
-                FormPrincipal formAcceso = new FormPrincipal();
-                formAcceso.Show();
+                MessageBox.Show("ingreso correcto");
+                Form2 seleccion = new Form2();
+                seleccion.Show();
                 this.Hide();
             }
             else
@@ -49,7 +49,7 @@ namespace ProyectoApredicesInterfaz
         {
             FormRecuperacionContraseña formRecuperacionContraseña = new FormRecuperacionContraseña();
             formRecuperacionContraseña.Show();
-            this.Hide();
+           
         }
     }
 }

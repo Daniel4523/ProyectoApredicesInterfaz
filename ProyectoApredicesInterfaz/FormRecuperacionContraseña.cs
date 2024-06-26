@@ -14,21 +14,15 @@ namespace ProyectoApredicesInterfaz
     public partial class FormRecuperacionContraseña : Form
     {
         private Funciones logica;
-       
+        private string correoUsuario; 
+
         public FormRecuperacionContraseña()
         {
-
-            var listTextBox = new List<TextBox>();
-            listTextBox.Add(textBox1);
-            listTextBox.Add(textBox2);
-            listTextBox.Add(textBox3);
-            Object[] objetos = { };
-
-            logica = new Funciones(listTextBox, objetos);
             InitializeComponent();
-     
+            var listTextBox = new List<TextBox> { textBox1, textBox2, textBox3 };
+            logica = new Funciones(listTextBox, null);
         }
-    
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (logica.ValidarEmails(textBox1.Text, textBox2.Text))
@@ -36,8 +30,9 @@ namespace ProyectoApredicesInterfaz
                 string codigo = logica.GenerarCodigo();
                 try
                 {
-                    logica.EnviarCorreo(textBox1.Text, codigo);
+                    logica.EnviarCorreo(textBox1.Text);
                     MessageBox.Show("El código ha sido enviado a tu correo electrónico.");
+                    correoUsuario = textBox1.Text; 
                 }
                 catch (Exception ex)
                 {
@@ -55,8 +50,9 @@ namespace ProyectoApredicesInterfaz
             if (logica.VerificarCodigo(textBox3.Text))
             {
                 MessageBox.Show("Código verificado exitosamente.");
-                FormConfirmacionContraseña formularioConfirmacion = new FormConfirmacionContraseña();
-                formularioConfirmacion.Show();
+
+                FormConfirmacionContraseña formConfirmacion = new FormConfirmacionContraseña(correoUsuario);
+                formConfirmacion.Show();
                 this.Hide();
             }
             else
