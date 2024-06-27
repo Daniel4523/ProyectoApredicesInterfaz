@@ -40,7 +40,7 @@ namespace ProyectoApredicesInterfaz
             }
             else
             {
-                MessageBox.Show("usuario o contrseña incorrectos.");
+                MessageBox.Show("Error. Verifique sus creedenciales o la conexión a internet.");
             }
 
         }

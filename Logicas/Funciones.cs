@@ -14,6 +14,7 @@ using MongoDB.Driver;
 using Conexiones;
 using MongoDB.Bson;
 using System.Text.RegularExpressions;
+using System.Net.NetworkInformation;
 
 namespace Logicas
 {
@@ -36,10 +37,46 @@ namespace Logicas
             string usuarioIngresado = listTextBox[0].Text;
             string contraseñaIngresada = listTextBox[1].Text;
 
-            var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaIngresada);
-            var usuario = basedatos.Find(filter).FirstOrDefault();
+     
+            if (!ConexionInternet())
+            {
+                MessageBox.Show("No tienes conexión a internet. Por favor, verifica tu conexión.", "Error de Conexión");
+                return false;
+            }
 
-            return usuario != null;
+            try
+            {
+                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaIngresada);
+                var usuario = basedatos.Find(filter).FirstOrDefault();
+
+                return usuario != null;
+            }
+            catch (MongoConnectionException ex)
+            {
+                MessageBox.Show("No se puede conectar a la base de datos. Por favor, verifica tu conexión a internet.", "Error de Conexión");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar acceder a la base de datos: Error");
+                return false;
+            }
+        }
+
+        private bool ConexionInternet()
+        {
+            try
+            {
+                using (var ping = new Ping())
+                {
+                    var reply = ping.Send("8.8.8.8", 1000);
+                    return reply.Status == IPStatus.Success;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private string codigoGenerado;
@@ -75,7 +112,7 @@ namespace Logicas
                 string codigo = GenerarCodigo();
                 MailMessage mail = new MailMessage(remitente, destinatario);
                 mail.Subject = "Código de recuperación de contraseña";
-                mail.Body = $"Tu código de recuperación es: {codigo}";
+                mail.Body = $"Su código de recuperación es: {codigo}";
                 SmtpClient client = new SmtpClient("smtp.office365.com");
                 client.Port = 587;
                 client.Credentials = new NetworkCredential(remitente, contraseña);
@@ -128,7 +165,7 @@ namespace Logicas
 
        
             var confirmResult = MessageBox.Show(
-                $"¿Deseas agregar el siguiente usuario?\n\n" +
+                $"¿Desea agregar el siguiente usuario?\n\n" +
                 $"Correo: {correo}\n" +
                 $"Contraseña: {contraseña}\n" +
                 $"Rol: {rol}\n\n",
