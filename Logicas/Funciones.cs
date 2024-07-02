@@ -122,7 +122,7 @@ namespace Logicas
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al enviar el correo: {ex.Message}");
+                throw new Exception($"Error al enviar el correo: {ex.Message}");1
             }
         }
 
