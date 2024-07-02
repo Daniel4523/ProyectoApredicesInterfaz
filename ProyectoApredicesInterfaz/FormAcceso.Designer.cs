@@ -33,6 +33,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +61,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(713, 405);
+            this.button2.Location = new System.Drawing.Point(554, 404);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -95,6 +95,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(361, 451);
             this.panel1.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Stencil", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(88, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(183, 95);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "GST";
             // 
             // label1
             // 
@@ -174,16 +184,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(180, 15);
             this.textBox3.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Stencil", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(88, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(183, 95);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "GST";
             // 
             // FormPrincipal
             // 
