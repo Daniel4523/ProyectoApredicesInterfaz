@@ -97,6 +97,12 @@
     <Compile Include="FormConsultarServiciosYPlataformas.Designer.cs">
       <DependentUpon>FormConsultarServiciosYPlataformas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRecuperacionContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRecuperacionContraseña.Designer.cs">
+      <DependentUpon>FormRecuperacionContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAcceso.resx">
