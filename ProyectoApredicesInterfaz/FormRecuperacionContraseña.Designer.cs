@@ -59,7 +59,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(436, 307);
+            this.button1.Location = new System.Drawing.Point(426, 307);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(315, 48);
             this.button1.TabIndex = 8;
@@ -76,7 +76,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft JhengHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(413, 372);
+            this.button2.Location = new System.Drawing.Point(414, 373);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(315, 48);
             this.button2.TabIndex = 9;
