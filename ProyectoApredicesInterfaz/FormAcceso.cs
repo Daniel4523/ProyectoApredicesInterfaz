@@ -47,7 +47,7 @@ namespace ProyectoApredicesInterfaz
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormRecuperacionContraseña formRecuperacionContraseña = new FormRecuperacionContraseña();
+            FormRecuperarContraseña formRecuperacionContraseña = new FormRecuperarContraseña();
             formRecuperacionContraseña.Show();
            
         }

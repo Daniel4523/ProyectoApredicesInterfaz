@@ -45,10 +45,11 @@
             // 
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(436, 205);
+            this.textBox2.Location = new System.Drawing.Point(436, 286);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(292, 15);
             this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "Confirmacion del correo";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
@@ -65,7 +66,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Solicitar Codigo";
             this.button1.UseVisualStyleBackColor = true;
-            
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
@@ -145,24 +146,26 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(292, 15);
             this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "correo";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Location = new System.Drawing.Point(436, 286);
+            this.textBox3.Location = new System.Drawing.Point(436, 205);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(292, 15);
             this.textBox3.TabIndex = 15;
             // 
-            // FormRecuperacionContraseña
+            // FormRecuperarContraseña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
@@ -170,9 +173,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
             this.ForeColor = System.Drawing.SystemColors.Control;
-            this.Name = "FormRecuperacionContraseña";
+            this.Name = "FormRecuperarContraseña";
             this.Opacity = 0.95D;
             this.Text = "FormRecuperacionContraseña";
             this.panel1.ResumeLayout(false);
