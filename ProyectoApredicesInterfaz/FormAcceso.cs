@@ -21,8 +21,9 @@ namespace ProyectoApredicesInterfaz
 
           
             var listTextBox = new List<TextBox>();
-            listTextBox.Add(textBox1); 
-            listTextBox.Add(textBox2); 
+            listTextBox.Add(textBox1);
+            listTextBox.Add(textBox2);
+            listTextBox.Add(textBox3); 
             Object[] objetos = { };
 
             logica = new Funciones(listTextBox, objetos);

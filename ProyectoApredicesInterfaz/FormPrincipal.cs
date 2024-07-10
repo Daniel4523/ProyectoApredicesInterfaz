@@ -27,14 +27,14 @@ namespace ProyectoApredicesInterfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FormAdministrador formadminsitrador = new FormAdministrador();
+            formadminsitrador.Show();
+            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormAdministrador formadminsitrador = new FormAdministrador();
-            formadminsitrador.Show();
-            this.Hide();
+          
         }
 
         private void label1_Click(object sender, EventArgs e)

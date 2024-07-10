@@ -62,5 +62,38 @@ namespace ProyectoApredicesInterfaz
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string nuevaContraseña = textBox1.Text;
+            string confirmarContraseña = textBox2.Text;
+
+            if (nuevaContraseña != confirmarContraseña)
+            {
+                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            try
+            {
+                bool actualizado = logica.ActualizarContraseña(correoUsuario, nuevaContraseña);
+
+                if (actualizado)
+                {
+                    MessageBox.Show("Contraseña actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar la contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al actualizar contraseña: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

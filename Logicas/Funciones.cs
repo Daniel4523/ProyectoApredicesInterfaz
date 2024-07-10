@@ -35,7 +35,7 @@ namespace Logicas
         public bool ingresar()
         {
             string usuarioIngresado = listTextBox[0].Text;
-            string contraseñaIngresada = listTextBox[1].Text;
+            string contraseñaIngresada = listTextBox[2].Text;
 
      
             if (!ConexionInternet())
