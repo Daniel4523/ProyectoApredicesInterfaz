@@ -9,7 +9,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conexiones", "Conexiones\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logicas", "Logicas\Logicas.csproj", "{2B9FC1ED-9FA7-4CE2-8FBD-38187D3B29ED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imagenes", "imagenes", "{3978F1F5-A94C-4F57-AEF4-878025DD0085}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imagenes", "imagenes", "{2E9C90D8-5666-4360-8A2E-E40AE9D5D41E}"
+	ProjectSection(SolutionItems) = preProject
+		Imagenes\administracion (1).png = Imagenes\administracion (1).png
+		Imagenes\administracion.png = Imagenes\administracion.png
+		Imagenes\atencion-al-cliente.png = Imagenes\atencion-al-cliente.png
+		Imagenes\bloquear.png = Imagenes\bloquear.png
+		Imagenes\buscar.png = Imagenes\buscar.png
+		Imagenes\contrasena.png = Imagenes\contrasena.png
+		Imagenes\esconder.png = Imagenes\esconder.png
+		Imagenes\limpieza-de-datos.png = Imagenes\limpieza-de-datos.png
+		Imagenes\ojo.png = Imagenes\ojo.png
+		Imagenes\red.png = Imagenes\red.png
+		Imagenes\servicio-de-reparacion.png = Imagenes\servicio-de-reparacion.png
+		Imagenes\servicio.png = Imagenes\servicio.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
