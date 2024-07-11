@@ -18,13 +18,13 @@ namespace ProyectoApredicesInterfaz
         {
             InitializeComponent();
             var listTextBox = new List<TextBox>();
-            listTextBox.Add(textBox1);
-            listTextBox.Add(textBox2);
-            listTextBox.Add(textBox3);
-            listTextBox.Add(textBox4);
             listTextBox.Add(textBox5);
-            listTextBox.Add(textBox6);
-            listTextBox.Add(textBox7);
+            listTextBox.Add(textBox8);
+            listTextBox.Add(textBox9);
+            listTextBox.Add(textBox10);
+            listTextBox.Add(textBox11);
+            listTextBox.Add(textBox12);
+            listTextBox.Add(textBox13);
             Object[] objetos = { };
             logica = new Funciones(listTextBox, objetos);
         }
@@ -37,7 +37,7 @@ namespace ProyectoApredicesInterfaz
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string correoActual = textBox7.Text;
+            string correoActual = textBox13.Text;
             
 
             bool eliminado = logica.EliminarUsuario(correoActual);
