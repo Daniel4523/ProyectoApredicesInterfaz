@@ -19,38 +19,34 @@ namespace ProyectoApredicesInterfaz
         {
             InitializeComponent();
 
-          
-            var listTextBox = new List<TextBox>();
-            listTextBox.Add(textBox1);
-            listTextBox.Add(textBox2);
-            listTextBox.Add(textBox3); 
-            Object[] objetos = { };
 
-            logica = new Funciones(listTextBox, objetos);
+            var listTextBox = new List<TextBox> { textBox1, textBox2, textBox3 };
+            logica = new Funciones(listTextBox, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool ingresoExitoso = logica.ingresar();
+            string rolUsuario;
+            bool ingresoExitoso = logica.Ingresar(out rolUsuario);
             if (ingresoExitoso)
             {
-                MessageBox.Show("ingreso correcto");
-                Form2 seleccion = new Form2();
-                seleccion.Show();
+                MessageBox.Show("Ingreso correcto con rol: " + rolUsuario);
+            
+                Form2 form2 = new Form2(rolUsuario);
+                form2.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Error. Verifique sus creedenciales o la conexión a internet.");
+                MessageBox.Show("Error. Verifique sus credenciales o la conexión a internet.");
             }
-
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormRecuperarContraseña formRecuperacionContraseña = new FormRecuperarContraseña();
             formRecuperacionContraseña.Show();
-           
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
