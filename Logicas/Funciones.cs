@@ -290,20 +290,21 @@ namespace Logicas
 
         public bool ActualizarContraseña(string usuarioActual, string nuevaContraseña)
         {
-            var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActual);
-            var usuario = basedatos.Find(filter).FirstOrDefault();
-
-            if (usuario == null)
-            {
-                MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
             try
             {
+            
+                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActual);
+                var usuario = basedatos.Find(filter).FirstOrDefault();
+
+                if (usuario == null)
+                {
+                    MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
                 string nuevaContraseñaEncriptada = EncryptString(nuevaContraseña);
-                usuario.Psw = nuevaContraseñaEncriptada;
-                var updateResult = basedatos.ReplaceOne(filter, usuario);
+                var update = Builders<MongoConexion>.Update.Set("Psw", nuevaContraseñaEncriptada);
+                var updateResult = basedatos.UpdateOne(filter, update);
 
                 if (updateResult.ModifiedCount > 0)
                 {
@@ -321,6 +322,7 @@ namespace Logicas
                 return false;
             }
         }
+
 
         private string EncryptString(string plainText)
         {
