@@ -65,9 +65,11 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(523, 160);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(540, 160);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(216, 15);
+            this.textBox1.Size = new System.Drawing.Size(216, 22);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
@@ -142,9 +144,9 @@
             this.label2.ForeColor = System.Drawing.Color.DimGray;
             this.label2.Location = new System.Drawing.Point(419, 153);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 29);
+            this.label2.Size = new System.Drawing.Size(110, 29);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Usuario";
+            this.label2.Text = "Usuario: ";
             // 
             // label3
             // 
@@ -154,16 +156,16 @@
             this.label3.ForeColor = System.Drawing.Color.DimGray;
             this.label3.Location = new System.Drawing.Point(419, 220);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(139, 29);
+            this.label3.Size = new System.Drawing.Size(151, 29);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Contraseña";
+            this.label3.Text = "Contraseña: ";
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DimGray;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.ForeColor = System.Drawing.Color.DimGray;
-            this.button3.Location = new System.Drawing.Point(523, 181);
+            this.button3.Location = new System.Drawing.Point(540, 188);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(216, 6);
             this.button3.TabIndex = 9;
@@ -174,7 +176,7 @@
             this.button4.BackColor = System.Drawing.Color.DimGray;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.ForeColor = System.Drawing.Color.DimGray;
-            this.button4.Location = new System.Drawing.Point(554, 243);
+            this.button4.Location = new System.Drawing.Point(571, 248);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(185, 6);
             this.button4.TabIndex = 10;
@@ -184,9 +186,11 @@
             // 
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Location = new System.Drawing.Point(559, 222);
+            this.textBox3.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.ForeColor = System.Drawing.Color.White;
+            this.textBox3.Location = new System.Drawing.Point(576, 220);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(180, 15);
+            this.textBox3.Size = new System.Drawing.Size(180, 22);
             this.textBox3.TabIndex = 11;
             // 
             // FormPrincipal
