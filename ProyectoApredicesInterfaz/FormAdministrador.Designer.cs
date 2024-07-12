@@ -65,6 +65,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 15);
             this.textBox5.TabIndex = 5;
+            this.textBox5.Text = "correo";
             // 
             // button2
             // 
@@ -147,6 +148,7 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 15);
             this.textBox8.TabIndex = 15;
+            this.textBox8.Text = "confirmacion del correo";
             // 
             // textBox9
             // 
@@ -156,6 +158,7 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 15);
             this.textBox9.TabIndex = 16;
+            this.textBox9.Text = "Contraseña";
             // 
             // textBox10
             // 
@@ -165,6 +168,7 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(100, 15);
             this.textBox10.TabIndex = 17;
+            this.textBox10.Text = "confirmacion de contraseña";
             // 
             // textBox11
             // 
@@ -174,6 +178,7 @@
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(100, 15);
             this.textBox11.TabIndex = 18;
+            this.textBox11.Text = "Rol";
             // 
             // textBox12
             // 
@@ -183,6 +188,7 @@
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(100, 15);
             this.textBox12.TabIndex = 19;
+            this.textBox12.Text = "Confirmacion del rol";
             // 
             // textBox13
             // 
@@ -192,6 +198,7 @@
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(100, 15);
             this.textBox13.TabIndex = 20;
+            this.textBox13.Text = "Correo a eliminar+";
             // 
             // FormAdministrador
             // 
