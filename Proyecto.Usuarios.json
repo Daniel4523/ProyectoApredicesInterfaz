@@ -3,23 +3,23 @@
     "$oid": "667c14f14efbcaeb85b92987"
   },
   "user": "usuario2@usuario.com",
-  "psw": "2",
-  "rol": "verificar"
+  "psw": "WzTwnLQE+J3iSXINpLMkbw==",
+  "rol": "Verificar"
 },
 {
   "_id": {
     "$oid": "667c15094efbcaeb85b92989"
   },
   "user": "usuario3@usuario.com",
-  "psw": "3",
-  "rol": "limpiar"
+  "psw": "FHo9sa5YATPA0eo3bl4hiA==",
+  "rol": "Limpiar"
 },
 {
   "_id": {
     "$oid": "667c2542b4613e4f131461df"
   },
   "user": "prueba1@prueba.com",
-  "psw": "1234",
+  "psw": "vRB0C/nmdBOynHFOvi5Ckw==",
   "rol": "Limpiar"
 },
 {
@@ -27,7 +27,7 @@
     "$oid": "667c29716e3fd7ea4a3bf3cd"
   },
   "user": "usuario@usuario.com",
-  "psw": "1",
+  "psw": "vRB0C/nmdBOynHFOvi5Ckw==",
   "rol": "Admin"
 },
 {
@@ -35,6 +35,6 @@
     "$oid": "667c3504638304739f1fd0d6"
   },
   "user": "Mendezdaniel575@gmail.com",
-  "psw": "10",
+  "psw": "KbPegNraUAuKmSOcGkYOVg==",
   "rol": "Admin"
 }]
