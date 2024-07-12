@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Security;
-using System.Security.Cryptography;
-using MongoDB.Driver;
+﻿using Conexiones;
 using MongoDB.Bson;
-using System.Text.RegularExpressions;
-using System.Net.NetworkInformation;
-using Conexiones;
+using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Logicas
 {
@@ -24,9 +22,9 @@ namespace Logicas
         private const string encryptionKey = "fW4ASO2gkp7TMXfHxa+r2JJU7vZAE2nks0XZSv62p7Q=";
         private const string fixedIV = "1234567890123456";
 
-    
 
-     
+
+
 
         public Funciones(List<TextBox> listTextBox, object[] objetos)
         {
@@ -292,7 +290,7 @@ namespace Logicas
         {
             try
             {
-            
+
                 var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActual);
                 var usuario = basedatos.Find(filter).FirstOrDefault();
 
