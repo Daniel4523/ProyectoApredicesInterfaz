@@ -30,7 +30,7 @@ namespace ProyectoApredicesInterfaz
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (logica.VerificarCodigo(textBox3.Text))
+            if (logica.VerificarCodigo(textBox3.Text ))
             {
                 MessageBox.Show("Código verificado exitosamente.");
 

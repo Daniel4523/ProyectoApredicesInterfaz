@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Logicas
 {
@@ -37,7 +38,7 @@ namespace Logicas
 
         public bool Ingresar(out string rolUsuario)
         {
-            string usuarioIngresado = listTextBox[0].Text;
+            string usuarioIngresado = listTextBox[0].Text.ToLower();
             string contraseñaIngresada = listTextBox[2].Text;
             string contraseñaEncriptada = EncryptString(contraseñaIngresada);
 
@@ -98,8 +99,9 @@ namespace Logicas
 
         public bool ValidarEmails(string email1, string email2)
         {
-            return email1 == email2;
+            return string.Equals(email1, email2, StringComparison.OrdinalIgnoreCase);
         }
+
 
         public string GenerarCodigo()
         {
@@ -147,8 +149,8 @@ namespace Logicas
 
         public bool AgregarUsuario()
         {
-            string correo = listTextBox[0].Text;
-            string confirmacionCorreo = listTextBox[1].Text;
+            string correo = listTextBox[0].Text.ToLower();
+            string confirmacionCorreo = listTextBox[1].Text.ToLower();
             string contraseña = listTextBox[2].Text;
             string confirmacionContraseña = listTextBox[3].Text;
             string rol = listTextBox[4].Text;
@@ -290,8 +292,9 @@ namespace Logicas
         {
             try
             {
+                string usuarioActualLower = usuarioActual.ToLower();
 
-                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActual);
+                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActualLower);
                 var usuario = basedatos.Find(filter).FirstOrDefault();
 
                 if (usuario == null)
@@ -301,7 +304,7 @@ namespace Logicas
                 }
 
                 string nuevaContraseñaEncriptada = EncryptString(nuevaContraseña);
-                var update = Builders<MongoConexion>.Update.Set("Psw", nuevaContraseñaEncriptada);
+                var update = Builders<MongoConexion>.Update.Set("psw", nuevaContraseñaEncriptada);
                 var updateResult = basedatos.UpdateOne(filter, update);
 
                 if (updateResult.ModifiedCount > 0)
