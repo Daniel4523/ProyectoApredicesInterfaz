@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imagenes", "imagenes", "{2E
 		Imagenes\servicio.png = Imagenes\servicio.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexionApi", "ConexionApi\ConexionApi.csproj", "{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2B9FC1ED-9FA7-4CE2-8FBD-38187D3B29ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B9FC1ED-9FA7-4CE2-8FBD-38187D3B29ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B9FC1ED-9FA7-4CE2-8FBD-38187D3B29ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
