@@ -9,48 +9,48 @@ namespace ProyectoApredicesInterfaz
    
         public class Servicio
         {
-            public string Tipo { get; set; }
-            public string Estado { get; set; }
-            public List<Atributo> Atributos { get; set; }
+            public string tipo { get; set; }
+            public string estado { get; set; }
+            public List<Atributo> atributos { get; set; }
         }
 
         public class Atributo
         {
-            public string Nombre { get; set; }
-            public string Valor { get; set; }
+            public string nombre { get; set; }
+            public string valor { get; set; }
         }
 
         public class CuentaServicio
         {
-            public string CuentaServicioId { get; set; }
-            public string NombreCliente { get; set; }
-            public string Direccion { get; set; }
-            public DateTime FechaAlta { get; set; }
-            public string EstadoCuenta { get; set; }
-            public List<Servicio> Servicios { get; set; }
-            public List<HistorialServicio> HistorialServicios { get; set; }
-            public List<Factura> Facturas { get; set; }
-            public List<TicketSoporte> TicketsSoporte { get; set; }
+            public string cuentaServicioId { get; set; }
+            public string nombreCliente { get; set; }
+            public string direccion { get; set; }
+            public DateTime fechaAlta { get; set; }
+            public string estadoCuenta { get; set; }
+            public List<Servicio> servicios { get; set; }
+            public List<HistorialServicio> historialServicios { get; set; }
+            public List<Factura> facturas { get; set; }
+            public List<TicketSoporte> ticketsSoporte { get; set; }
         }
 
         public class HistorialServicio
         {
-            public DateTime FechaEvento { get; set; }
-            public string DescripcionEvento { get; set; }
+            public DateTime fechaEvento { get; set; }
+            public string descripcionEvento { get; set; }
         }
 
         public class Factura
         {
-            public DateTime FechaFactura { get; set; }
-            public decimal MontoTotal { get; set; }
-            public string EstadoPago { get; set; }
+            public DateTime fechaFactura { get; set; }
+            public decimal montoTotal { get; set; }
+            public string estadoPago { get; set; }
         }
 
         public class TicketSoporte
         {
-            public string IdTicket { get; set; }
-            public DateTime FechaApertura { get; set; }
-            public string DescripcionProblema { get; set; }
-            public string EstadoTicket { get; set; }
+            public string idTicket { get; set; }
+            public DateTime fechaApertura { get; set; }
+            public string descripcionProblema { get; set; }
+            public string estadoTicket { get; set; }
         }
     }

@@ -176,12 +176,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Logicas\Logicas.csproj">
-      <Project>{2b9fc1ed-9fa7-4ce2-8fbd-38187d3b29ed}</Project>
-      <Name>Logicas</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
@@ -192,6 +186,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logicas\Logicas.csproj">
+      <Project>{2b9fc1ed-9fa7-4ce2-8fbd-38187d3b29ed}</Project>
+      <Name>Logicas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
