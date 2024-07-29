@@ -32,7 +32,7 @@ namespace ProyectoApredicesInterfaz
             }
             else
             {
-                MessageBox.Show("Error.");
+                MessageBox.Show("No ha podido ingresar. Intente de nuevo");
             }
         }
 

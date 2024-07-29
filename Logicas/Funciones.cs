@@ -11,7 +11,6 @@ using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Logicas
@@ -44,9 +43,26 @@ namespace Logicas
 
             rolUsuario = null;
 
-            ConexionInternet();
-            
-               
+            int intentos = 2; 
+            int tiempoEspera = 2000; 
+
+            while (intentos > 0)
+            {
+                if (ConexionInternet())
+                {
+                    break; 
+                }
+
+              
+                System.Threading.Thread.Sleep(tiempoEspera);
+                intentos--;
+            }
+
+            if (intentos == 0)
+            {
+                MessageBox.Show("No tienes conexión a internet. Por favor, verifica tu conexión.", "Error de Conexión");
+                return false;
+            }
 
             try
             {
@@ -75,33 +91,20 @@ namespace Logicas
             }
         }
 
-
-        private async Task<bool> ConexionInternet()
+        private bool ConexionInternet()
         {
             try
             {
                 using (var ping = new Ping())
                 {
-                    int retries = 5;
-                    int delay = 1000; // 1 second delay
-
-                    for (int i = 0; i < retries; i++)
-                    {
-                        var reply = ping.Send("8.8.8.8", 1000);
-                        if (reply.Status == IPStatus.Success)
-                        {
-                            return true;
-                        }
-                        await Task.Delay(delay);
-                    }
+                    var reply = ping.Send("8.8.8.8", 1000);
+                    return reply.Status == IPStatus.Success;
                 }
             }
             catch
             {
-              
+                return false;
             }
-
-            return false;
         }
 
         private string codigoGenerado;
