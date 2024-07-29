@@ -13,8 +13,8 @@ namespace ConexionApi.Controllers
             var cuentaServicio = new CuentaServicio
             {
                 CuentaServicioId = "cs-123456",
-                NombreCliente = "Juan Perez",
-                Direccion = "Calle Falsa 123, Ciudad",
+                NombreCliente = "Paul Logan",
+                Direccion = "Calle 100 #72, Ciudad",
                 FechaAlta = DateTime.Now.AddYears(-1),
                 EstadoCuenta = "activo",
                 Servicios = new List<Servicio>
@@ -26,7 +26,7 @@ namespace ConexionApi.Controllers
                    Atributos = new List<Atributo>
                    {
                        new Atributo { Nombre = "identificadorLlamadas", Valor = "activo" },
-                       new Atributo { Nombre = "numeroTelefono", Valor = "555-1234" },
+                       new Atributo { Nombre = "numeroTelefono", Valor = "300105424" },
                        new Atributo { Nombre = "planVoz", Valor = "ilimitado" }
                    }
                },
@@ -36,9 +36,9 @@ namespace ConexionApi.Controllers
                    Estado = "activo",
                    Atributos = new List<Atributo>
                    {
-                       new Atributo { Nombre = "VelocidadSubidaGPON", Valor = "100M" },
-                       new Atributo { Nombre = "VelocidadSubidaAAA", Valor = "100m" },
-                       new Atributo { Nombre = "ip", Valor = "1.1.0.1" },
+                       new Atributo { Nombre = "VelocidadSubida", Valor = "100M" },
+                       new Atributo { Nombre = "VelocidadSubida", Valor = "100m" },
+                       new Atributo { Nombre = "ip", Valor = "10.01.110.17" },
                        new Atributo { Nombre = "VelocidadDescarga", Valor = "200M" },
                        new Atributo { Nombre = "planInternet", Valor = "premium" }
                    }

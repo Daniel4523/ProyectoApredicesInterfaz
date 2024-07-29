@@ -147,7 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataConexion.cs" />
+    <Compile Include="ConexionApi.cs" />
     <Compile Include="MongoConexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

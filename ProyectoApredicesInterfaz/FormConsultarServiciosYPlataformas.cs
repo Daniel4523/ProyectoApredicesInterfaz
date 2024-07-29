@@ -9,6 +9,7 @@ namespace ProyectoApredicesInterfaz
 {
     public partial class FormConsultarServiciosYPlataformas : Form
     {
+
         public FormConsultarServiciosYPlataformas()
         {
             InitializeComponent();

@@ -188,6 +188,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Conexiones\Conexiones.csproj">
+      <Project>{b0b12e61-8679-48f3-ac71-5f888e693af4}</Project>
+      <Name>Conexiones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logicas\Logicas.csproj">
       <Project>{2b9fc1ed-9fa7-4ce2-8fbd-38187d3b29ed}</Project>
       <Name>Logicas</Name>
