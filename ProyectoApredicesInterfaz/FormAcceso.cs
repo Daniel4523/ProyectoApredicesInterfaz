@@ -32,7 +32,7 @@ namespace ProyectoApredicesInterfaz
             }
             else
             {
-                MessageBox.Show("Error. Verifique sus credenciales o la conexión a internet.");
+                MessageBox.Show("Error.");
             }
         }
 
