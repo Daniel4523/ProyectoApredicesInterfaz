@@ -56,7 +56,7 @@
             this.button1.Location = new System.Drawing.Point(424, 309);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(315, 48);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 2;
             this.button1.Text = "ACCEDER";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -70,7 +70,7 @@
             this.textBox1.Location = new System.Drawing.Point(540, 160);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(216, 22);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
@@ -131,7 +131,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(470, 392);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(232, 27);
-            this.linkLabel1.TabIndex = 6;
+            this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "¿Olvido su contraseña?";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -168,7 +168,8 @@
             this.button3.Location = new System.Drawing.Point(540, 188);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(216, 6);
-            this.button3.TabIndex = 9;
+            this.button3.TabIndex = 0;
+            this.button3.TabStop = false;
             this.button3.UseVisualStyleBackColor = false;
             // 
             // button4
@@ -179,7 +180,8 @@
             this.button4.Location = new System.Drawing.Point(571, 248);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(185, 6);
-            this.button4.TabIndex = 10;
+            this.button4.TabIndex = 0;
+            this.button4.TabStop = false;
             this.button4.UseVisualStyleBackColor = false;
             // 
             // textBox3
@@ -191,7 +193,7 @@
             this.textBox3.Location = new System.Drawing.Point(576, 220);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(180, 22);
-            this.textBox3.TabIndex = 11;
+            this.textBox3.TabIndex = 1;
             // 
             // FormPrincipal
             // 

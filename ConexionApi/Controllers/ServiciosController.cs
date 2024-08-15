@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace ConexionApi.Controllers
 {
     [ApiController]
@@ -8,7 +7,7 @@ namespace ConexionApi.Controllers
     public class ServiciosController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<List<CuentaServicio>> Get()
+        public ActionResult<List<CuentaServicio>> Get([FromQuery] string cuentaServicioId = null)
         {
             var cuentasServicio = new List<CuentaServicio>
             {
@@ -60,47 +59,51 @@ namespace ConexionApi.Controllers
                         new TicketSoporte { IdTicket = "tkt-123", FechaApertura = DateTime.Now.AddMonths(-2), DescripcionProblema = "Interrupción del servicio de internet", EstadoTicket = "cerrado" }
                     }
                 },
-                new CuentaServicio{
-
-
-                 CuentaServicioId = "cs-789012",
-                NombreCliente = "Maria Gomez",
-                Direccion = "Avenida 500 #30, Ciudad",
-                FechaAlta = DateTime.Now.AddYears(-2),
-                EstadoCuenta = "suspendido",
-                Servicios = new List<Servicio>
+                new CuentaServicio
                 {
-                    new Servicio
+                    CuentaServicioId = "cs-789012",
+                    NombreCliente = "Maria Gomez",
+                    Direccion = "Avenida 500 #30, Ciudad",
+                    FechaAlta = DateTime.Now.AddYears(-2),
+                    EstadoCuenta = "suspendido",
+                    Servicios = new List<Servicio>
                     {
-                        Tipo = "televisión",
-                        Estado = "activo",
-                        Atributos = new List<Atributo>
+                        new Servicio
                         {
-                            new Atributo { Nombre = "canales", Valor = "150" },
-                            new Atributo { Nombre = "paquete", Valor = "estándar" }
+                            Tipo = "televisión",
+                            Estado = "activo",
+                            Atributos = new List<Atributo>
+                            {
+                                new Atributo { Nombre = "canales", Valor = "150" },
+                                new Atributo { Nombre = "paquete", Valor = "estándar" }
+                            }
                         }
+                    },
+                    HistorialServicios = new List<HistorialServicio>
+                    {
+                        new HistorialServicio { FechaEvento = DateTime.Now.AddMonths(-12), DescripcionEvento = "Contratación del servicio de televisión" },
+                        new HistorialServicio { FechaEvento = DateTime.Now.AddMonths(-4), DescripcionEvento = "Suspensión temporal del servicio" }
+                    },
+                    Facturas = new List<Factura>
+                    {
+                        new Factura { FechaFactura = DateTime.Now.AddMonths(-2), MontoTotal = 40.00M, EstadoPago = "pendiente" }
+                    },
+                    TicketsSoporte = new List<TicketSoporte>
+                    {
+                        new TicketSoporte { IdTicket = "tkt-456", FechaApertura = DateTime.Now.AddMonths(-5), DescripcionProblema = "Problemas con la recepción del canal", EstadoTicket = "abierto" }
                     }
-                },
-                HistorialServicios = new List<HistorialServicio>
-                {
-                    new HistorialServicio { FechaEvento = DateTime.Now.AddMonths(-12), DescripcionEvento = "Contratación del servicio de televisión" },
-                    new HistorialServicio { FechaEvento = DateTime.Now.AddMonths(-4), DescripcionEvento = "Suspensión temporal del servicio" }
-                },
-                Facturas = new List<Factura>
-                {
-                    new Factura { FechaFactura = DateTime.Now.AddMonths(-2), MontoTotal = 40.00M, EstadoPago = "pendiente" }
-                },
-                TicketsSoporte = new List<TicketSoporte>
-                {
-                    new TicketSoporte { IdTicket = "tkt-456", FechaApertura = DateTime.Now.AddMonths(-5), DescripcionProblema = "Problemas con la recepción del canal", EstadoTicket = "abierto" }
                 }
-                }
-             
             };
 
+        
+            if (!string.IsNullOrEmpty(cuentaServicioId))
+            {
+                cuentasServicio = cuentasServicio
+                    .Where(c => c.CuentaServicioId == cuentaServicioId)
+                    .ToList();
+            }
+
             return Ok(cuentasServicio);
-
         }
-
     }
 }
