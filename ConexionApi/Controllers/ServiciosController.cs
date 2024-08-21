@@ -6,10 +6,8 @@ namespace ConexionApi.Controllers
     [Route("api/[controller]")]
     public class ServiciosController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<List<CuentaServicio>> Get([FromQuery] string cuentaServicioId = null)
-        {
-            var cuentasServicio = new List<CuentaServicio>
+        
+           private static List<CuentaServicio> cuentasServicio = new List<CuentaServicio>
             {
                 new CuentaServicio
                 {
@@ -94,16 +92,101 @@ namespace ConexionApi.Controllers
                     }
                 }
             };
+        public class CuentaServicioInputModel
+        {
+            public string CuentaServicioId { get; set; }
+            public string NombreCliente { get; set; }
+            public string Direccion { get; set; }
+            public string EstadoCuenta { get; set; }
+        }
+        [HttpGet]
+        public ActionResult<List<CuentaServicio>> Get([FromQuery] string cuentaServicioId = null)
+        {
+            var resultado = cuentasServicio;
 
-        
             if (!string.IsNullOrEmpty(cuentaServicioId))
             {
-                cuentasServicio = cuentasServicio
+                resultado = resultado
                     .Where(c => c.CuentaServicioId == cuentaServicioId)
                     .ToList();
             }
 
-            return Ok(cuentasServicio);
+            return Ok(resultado);
+        }
+        [HttpPost]
+        public ActionResult<CuentaServicio> Post([FromBody] CuentaServicio nuevaCuenta)
+        {
+            if (nuevaCuenta == null || string.IsNullOrEmpty(nuevaCuenta.CuentaServicioId))
+            {
+                return BadRequest("La cuenta de servicio debe tener un ID.");
+            }
+
+            cuentasServicio.Add(nuevaCuenta);
+            return CreatedAtAction(nameof(Get), new { cuentaServicioId = nuevaCuenta.CuentaServicioId }, nuevaCuenta);
+        }
+
+        [HttpPut("{cuentaServicioId}")]
+        public ActionResult<CuentaServicio> Put(string cuentaServicioId, [FromBody] CuentaServicioInputModel cuentaActualizada)
+        {
+            var cuentaExistente = cuentasServicio.FirstOrDefault(c => c.CuentaServicioId == cuentaServicioId);
+
+            if (cuentaExistente == null)
+            {
+                return NotFound("Cuenta de servicio no encontrada.");
+            }
+
+            if (cuentaActualizada == null ||
+                cuentaActualizada.CuentaServicioId != cuentaServicioId ||
+                string.IsNullOrEmpty(cuentaActualizada.NombreCliente) ||
+                string.IsNullOrEmpty(cuentaActualizada.Direccion) ||
+                string.IsNullOrEmpty(cuentaActualizada.EstadoCuenta))
+            {
+                return BadRequest("Todos los campos (cuentaServicioId, nombreCliente, direccion, estadoCuenta) son obligatorios y el ID debe coincidir.");
+            }
+
+            cuentaExistente.NombreCliente = cuentaActualizada.NombreCliente;
+            cuentaExistente.Direccion = cuentaActualizada.Direccion;
+            cuentaExistente.EstadoCuenta = cuentaActualizada.EstadoCuenta;
+
+            return Ok(cuentaExistente);
+        }
+
+     
+
+       
+
+        [HttpDelete("{cuentaServicioId}/{tipoDato}")]
+        public ActionResult Delete(string cuentaServicioId, string tipoDato)
+        {
+            var cuentaExistente = cuentasServicio.FirstOrDefault(c => c.CuentaServicioId == cuentaServicioId);
+
+            if (cuentaExistente == null)
+            {
+                return NotFound("Cuenta de servicio no encontrada.");
+            }
+
+            switch (tipoDato.ToLower())
+            {
+                case "historialservicios":
+                    cuentaExistente.HistorialServicios.Clear();
+                    break;
+                case "facturas":
+                    cuentaExistente.Facturas.Clear();
+                    break;
+                case "ticketssoporte":
+                    cuentaExistente.TicketsSoporte.Clear();
+                    break;
+                case "servicios":
+                    cuentaExistente.Servicios.Clear();
+                    break;
+                default:
+                    return BadRequest("Tipo de dato no reconocido.");
+            }
+
+            return NoContent();
         }
     }
 }
+
+        
+  
