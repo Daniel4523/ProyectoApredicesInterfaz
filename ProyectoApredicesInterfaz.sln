@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imagenes", "imagenes", "{2E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConexionApi", "ConexionApi\ConexionApi.csproj", "{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFront", "WebpROYECTO\WebFront.csproj", "{FC155C99-1037-4518-B4FC-8EADDE15D3F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A593CD9D-D096-42A6-BA2F-3AB33E1F0170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC155C99-1037-4518-B4FC-8EADDE15D3F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC155C99-1037-4518-B4FC-8EADDE15D3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC155C99-1037-4518-B4FC-8EADDE15D3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC155C99-1037-4518-B4FC-8EADDE15D3F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
