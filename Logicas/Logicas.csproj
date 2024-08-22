@@ -152,12 +152,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Conexiones\Conexiones.csproj">
-      <Project>{b0b12e61-8679-48f3-ac71-5f888e693af4}</Project>
-      <Name>Conexiones</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="libmongocrypt.dylib" />
     <None Include="libmongocrypt.so" />
@@ -168,6 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Conexiones\Conexiones.csproj">
+      <Project>{B0B12E61-8679-48F3-AC71-5F888E693AF4}</Project>
+      <Name>Conexiones</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MongoDB.Libmongocrypt.1.9.0\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.9.0\build\MongoDB.Libmongocrypt.targets')" />

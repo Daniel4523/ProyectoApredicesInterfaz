@@ -2,72 +2,33 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
-namespace Logicas
+namespace Proyecto.Logica
 {
     public class Funciones
     {
-        private List<TextBox> listTextBox;
-        private IMongoCollection<MongoConexion> basedatos;
-        private const string encryptionKey = "fW4ASO2gkp7TMXfHxa+r2JJU7vZAE2nks0XZSv62p7Q=";
-        private const string fixedIV = "1234567890123456";
-
-
-
-
-
-        public Funciones(List<TextBox> listTextBox, object[] objetos)
+        private readonly IMongoCollection<MongoConexion> _basedatos;
+        private string codigoGenerado;
+        public Funciones(IMongoClient client)
         {
-            var client = new MongoClient("mongodb://localhost:27017/");
             var database = client.GetDatabase("Proyecto");
-            basedatos = database.GetCollection<MongoConexion>("Usuarios");
-
-            this.listTextBox = listTextBox;
+            _basedatos = database.GetCollection<MongoConexion>("Usuarios");
         }
 
-        public bool Ingresar(out string rolUsuario)
+        public bool Ingresar(string usuarioIngresado, string contraseñaIngresada, out string rolUsuario)
         {
-            string usuarioIngresado = listTextBox[0].Text.ToLower();
-            string contraseñaIngresada = listTextBox[2].Text;
-            string contraseñaEncriptada = EncryptString(contraseñaIngresada);
-
             rolUsuario = null;
-
-            int intentos = 2; 
-            int tiempoEspera = 2000; 
-
-            while (intentos > 0)
-            {
-                if (ConexionInternet())
-                {
-                    break; 
-                }
-
-              
-                System.Threading.Thread.Sleep(tiempoEspera);
-                intentos--;
-            }
-
-            if (intentos == 0)
-            {
-                MessageBox.Show("No tienes conexión a internet. Por favor, verifica tu conexión.", "Error de Conexión");
-                return false;
-            }
 
             try
             {
-                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaEncriptada);
-                var usuario = basedatos.Find(filter).FirstOrDefault();
+                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaIngresada);
+                var usuario = _basedatos.Find(filter).FirstOrDefault();
 
                 if (usuario != null)
                 {
@@ -79,43 +40,15 @@ namespace Logicas
                     return false;
                 }
             }
-            catch (MongoConnectionException ex)
+            catch (MongoConnectionException)
             {
-                MessageBox.Show("No se puede conectar a la base de datos. Por favor, verifica tu conexión a internet.", "Error de Conexión");
-                return false;
+                throw new Exception("No se puede conectar a la base de datos. Por favor, verifica tu conexión a internet.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al intentar acceder a la base de datos: " + ex.Message, "Error");
-                return false;
+                throw new Exception("Ocurrió un error al intentar acceder a la base de datos: " + ex.Message);
             }
         }
-
-        private bool ConexionInternet()
-        {
-            try
-            {
-                using (var ping = new Ping())
-                {
-                    var reply = ping.Send("8.8.8.8", 1000);
-                    return reply.Status == IPStatus.Success;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private string codigoGenerado;
-
-
-        public bool ValidarEmails(string email1, string email2)
-        {
-            return string.Equals(email1, email2, StringComparison.OrdinalIgnoreCase);
-        }
-
-
         public string GenerarCodigo()
         {
             Random random = new Random();
@@ -123,242 +56,67 @@ namespace Logicas
             return codigoGenerado;
         }
 
-        public void EnviarCorreo(string destinatario)
+        public bool EnviarCorreoRecuperacion(string email)
         {
-            string remitente = "pruebasproyectoaprendices@outlook.com";
-            string contraseña = "123proyecto123";
-
-            var filter = Builders<MongoConexion>.Filter.Regex("user", new BsonRegularExpression($"^{Regex.Escape(destinatario)}$", "i"));
-            var usuario = basedatos.Find(filter).FirstOrDefault();
-
-            if (usuario == null)
-            {
-                throw new Exception("Correo electrónico no encontrado en la base de datos.");
-            }
-
             try
             {
-                string codigo = GenerarCodigo();
-                MailMessage mail = new MailMessage(remitente, destinatario);
-                mail.Subject = "Código de recuperación de contraseña";
-                mail.Body = $"Su código de recuperación es: {codigo}";
-                SmtpClient client = new SmtpClient("smtp.office365.com");
-                client.Port = 587;
-                client.Credentials = new NetworkCredential(remitente, contraseña);
-                client.EnableSsl = true;
 
-                client.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error al enviar el correo: {ex.Message}");
-            }
-        }
+                var uniqueCode = Guid.NewGuid().ToString();
 
-        public bool VerificarCodigo(string codigoIngresado)
-        {
-            return codigoIngresado == codigoGenerado;
-        }
+            
+                GuardarCodigoRecuperacion(email, uniqueCode);
 
-        public bool AgregarUsuario()
-        {
-            string correo = listTextBox[0].Text.ToLower();
-            string confirmacionCorreo = listTextBox[1].Text.ToLower();
-            string contraseña = listTextBox[2].Text;
-            string confirmacionContraseña = listTextBox[3].Text;
-            string rol = listTextBox[4].Text;
-            string confirmacionRol = listTextBox[5].Text;
-
-            if (!IsValidEmail(correo))
-            {
-                MessageBox.Show("El correo electrónico no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (correo != confirmacionCorreo ||
-                contraseña != confirmacionContraseña ||
-                rol != confirmacionRol)
-            {
-                MessageBox.Show("Las confirmaciones no coinciden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (!EsRolValido(rol))
-            {
-                MessageBox.Show("El rol especificado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            var confirmResult = MessageBox.Show(
-                $"¿Desea agregar el siguiente usuario?\n\n" +
-                $"Correo: {correo}\n" +
-                $"Contraseña: {contraseña}\n" +
-                $"Rol: {rol}\n\n",
-                "Confirmar Agregar Usuario",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                string contraseñaEncriptada = EncryptString(contraseña);
-
-                var nuevoUsuario = new MongoConexion
+                var smtpClient = new SmtpClient("smtp.office365.com")
                 {
-                    User = correo,
-                    Psw = contraseñaEncriptada,
-                    Rol = rol
+                    Port = 587,
+                    Credentials = new NetworkCredential("pruebasproyectoaprendices@outlook.com", "123proyecto123"),
+                    EnableSsl = true,
                 };
 
-                try
+                var mailMessage = new MailMessage
                 {
-                    basedatos.InsertOne(nuevoUsuario);
-                    MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al agregar usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
+                    From = new MailAddress("pruebasproyectoaprendices@outlook.com"),
+                    Subject = "Recuperación de Contraseña",
+                    Body = $"Haz clic en el siguiente enlace para restablecer tu contraseña: <a href='http://localhost:5286/Home/ReestablecerContraseña?email={email}&code={uniqueCode}'>Restablecer Contraseña</a>",
+                    IsBodyHtml = true,
+                };
+                mailMessage.To.Add(email);
 
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool EsRolValido(string rol)
-        {
-            string[] rolesPermitidos = { "Admin", "Verificar", "Limpiar" };
-            return rolesPermitidos.Contains(rol);
-        }
-
-        public bool EliminarUsuario(string correoActual)
-        {
-            var filter = Builders<MongoConexion>.Filter.Eq("user", correoActual);
-            var usuario = basedatos.Find(filter).FirstOrDefault();
-
-            if (usuario == null)
-            {
-                MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            string rolActual = usuario.Rol;
-
-            if (rolActual == "Admin")
-            {
-                MessageBox.Show("No puedes eliminar un usuario con rol de Admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            var confirmResult = MessageBox.Show(
-                $"¿Deseas eliminar el siguiente usuario?\n\n" +
-                $"Correo: {usuario.User}\n" +
-                $"Rol: {rolActual}\n\n",
-                "Confirmar Eliminar Usuario",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                try
-                {
-                    var deleteResult = basedatos.DeleteOne(filter);
-                    if (deleteResult.DeletedCount > 0)
-                    {
-                        MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo eliminar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al eliminar usuario: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool ActualizarContraseña(string usuarioActual, string nuevaContraseña)
-        {
-            try
-            {
-                string usuarioActualLower = usuarioActual.ToLower();
-
-                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioActualLower);
-                var usuario = basedatos.Find(filter).FirstOrDefault();
-
-                if (usuario == null)
-                {
-                    MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-
-                string nuevaContraseñaEncriptada = EncryptString(nuevaContraseña);
-                var update = Builders<MongoConexion>.Update.Set("psw", nuevaContraseñaEncriptada);
-                var updateResult = basedatos.UpdateOne(filter, update);
-
-                if (updateResult.ModifiedCount > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo actualizar la contraseña.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
+                smtpClient.Send(mailMessage);
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al actualizar contraseña: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                throw new Exception("Ocurrió un error al enviar el correo electrónico: " + ex.Message);
             }
         }
 
-
-        private string EncryptString(string plainText)
+        public bool ConfirmarCorreo(string email)
         {
-            byte[] key = Convert.FromBase64String(encryptionKey);
-            byte[] iv = Encoding.UTF8.GetBytes(fixedIV);
-            using (Aes aesAlg = Aes.Create())
+            try
             {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                var filter = Builders<MongoConexion>.Filter.Eq("email", email);
+                var update = Builders<MongoConexion>.Update.Set("isConfirmed", true);
+                var result = _basedatos.UpdateOne(filter, update);
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error al confirmar el correo en la base de datos: " + ex.Message);
+            }
+        }
 
-                using (System.IO.MemoryStream msEncrypt = new System.IO.MemoryStream())
-                {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            swEncrypt.Write(plainText);
-                        }
-                    }
-                    return Convert.ToBase64String(msEncrypt.ToArray());
-                }
+        private void GuardarCodigoRecuperacion(string email, string codigo)
+        {
+            try
+            {
+                var filter = Builders<MongoConexion>.Filter.Eq("email", email);
+                var update = Builders<MongoConexion>.Update.Set("recoveryCode", codigo);
+                _basedatos.UpdateOne(filter, update);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error al guardar el código de recuperación: " + ex.Message);
             }
         }
     }
