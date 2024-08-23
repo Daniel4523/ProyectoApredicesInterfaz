@@ -21,10 +21,10 @@ namespace Conexiones
         [BsonElement("recoveryCode")]
         public string RecoveryCode { get; set; }
 
-        [BsonElement("email")] // Este campo es necesario si se usa en consultas
+        [BsonElement("email")] 
         public string Email { get; set; }
 
-        [BsonElement("isConfirmed")] // Campo adicional si estás confirmando emails
+        [BsonElement("isConfirmed")] 
         public bool IsConfirmed { get; set; }
     }
 }

@@ -53,20 +53,34 @@ namespace _conexionApi.Controllers
                 }
             }
         };
-
         [HttpGet]
-        public ActionResult<List<CuentaServicio>> Get([FromQuery] string CuentaServicio = null)
+        public ActionResult<List<CuentaServicio>> Get(
+    [FromQuery] string cuentaServicioId = null,
+    [FromQuery] string tipoServicio = null,
+    [FromQuery] string estadoServicio = null)
         {
-            var resultado = cuentasServicio;
-
-            if (!string.IsNullOrEmpty(CuentaServicio))
-            {
-                resultado = resultado
-                    .Where(c => c.CuentaServicioId == CuentaServicio)
-                    .ToList();
-            }
+            var resultado = cuentasServicio
+                .Where(c =>
+                    (string.IsNullOrEmpty(cuentaServicioId) || c.CuentaServicioId.Equals(cuentaServicioId, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrEmpty(tipoServicio) || c.Servicios.Any(s => s.Tipo.Equals(tipoServicio, StringComparison.OrdinalIgnoreCase))) &&
+                    (string.IsNullOrEmpty(estadoServicio) || c.Servicios.Any(s => s.Estado.Equals(estadoServicio, StringComparison.OrdinalIgnoreCase)))
+                )
+                .Select(c => new CuentaServicio
+                {
+                    CuentaServicioId = c.CuentaServicioId,
+                    Servicios = c.Servicios
+                        .Where(s =>
+                            (string.IsNullOrEmpty(tipoServicio) || s.Tipo.Equals(tipoServicio, StringComparison.OrdinalIgnoreCase)) &&
+                            (string.IsNullOrEmpty(estadoServicio) || s.Estado.Equals(estadoServicio, StringComparison.OrdinalIgnoreCase)))
+                        .ToList()
+                })
+                .ToList();
 
             return Ok(resultado);
         }
+
+
     }
 }
+
+    

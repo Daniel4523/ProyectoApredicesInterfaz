@@ -1,26 +1,33 @@
-    using Microsoft.AspNetCore.Mvc;
-    using Proyecto.Logica;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson.IO;
+using Proyecto.Logica;
+using System.Net.Http;
+using System.Threading.Tasks;
+using WebFront.Models;
+using Newtonsoft;
 
-    namespace Proyecto.Controllers
+namespace Proyecto.Controllers
+{
+    public class HomeController : Controller
     {
-        public class HomeController : Controller
+        private readonly Funciones _funciones;
+        private readonly HttpClient _httpClient;
+
+        public HomeController(Funciones funciones, HttpClient httpClient)
         {
-            private readonly Funciones _funciones;
+            _funciones = funciones;
+            _httpClient = httpClient;
+        }
 
-            public HomeController(Funciones funciones)
-            {
-                _funciones = funciones;
-            }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-            public IActionResult Index()
-            {
-                return View();
-            }
-
-            public IActionResult Login()
-            {
-                return View();
-            }
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Login(string usuarioIngresado, string contraseñaIngresada)
@@ -30,9 +37,7 @@
 
             if (resultado)
             {
-                // Guardar el rol en la sesión
                 HttpContext.Session.SetString("RolUsuario", rolUsuario);
-
                 return RedirectToAction("Inicio");
             }
             else
@@ -70,21 +75,18 @@
                 return RedirectToAction("OlvideMiContraseña");
             }
         }
+
         public IActionResult Inicio()
         {
-         
             string rolUsuario = HttpContext.Session.GetString("RolUsuario");
-
-           
             ViewBag.RolUsuario = rolUsuario;
-
             return View();
         }
 
         public IActionResult OlvideMiContraseña()
-            {
-                return View();
-            }
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult OlvideMiContraseña(string email)
@@ -99,8 +101,8 @@
             {
                 _funciones.EnviarCorreoRecuperacion(email);
                 TempData["SuccessMessage"] = "Se ha enviado un correo electrónico con el código de recuperación.";
-                TempData["CodeSent"] = true; 
-                TempData["Email"] = email;  
+                TempData["CodeSent"] = true;
+                TempData["Email"] = email;
             }
             catch (Exception ex)
             {
@@ -110,7 +112,6 @@
             return View();
         }
 
-      
         public IActionResult ReestablecerContraseña(string email)
         {
             return View(new { Email = email });
@@ -151,24 +152,39 @@
 
             return View(new { Email = email });
         }
+
         public IActionResult AdminView()
         {
-            return View(); 
+            return View();
         }
 
         public IActionResult VerificarView()
         {
-            return View(); 
+            return View();
+        }
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> ObtenerDatos(string cuentaServicioId, string tipoServicio, string estadoServicio)
+        {
+            var apiUrl = $"http://localhost:5117/api/Servicios?cuentaServicioId={cuentaServicioId}&tipoServicio={tipoServicio}&estadoServicio={estadoServicio}";
+
+            List<CuentaServicio> resultado;
+            try
+            {
+                var response = await _httpClient.GetStringAsync(apiUrl);
+                resultado = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CuentaServicio>>(response);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error al obtener datos de la API: " + ex.Message;
+                resultado = new List<CuentaServicio>();
+            }
+
+           
+            ViewBag.Resultado = resultado;
+
+            return View("VerificarView");
         }
 
-        
-        public IActionResult LimpiarView()
-        {
-            return View(); 
-        }
     }
 }
-    
-
-    
-    

@@ -15,7 +15,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true; // Solo accesible a través de HTTP
     options.Cookie.IsEssential = true; // La sesión es esencial para la aplicación
 });
-
+builder.Services.AddHttpClient();
 // Registra Funciones como un servicio singleton
 builder.Services.AddSingleton<Funciones>(sp =>
 {
