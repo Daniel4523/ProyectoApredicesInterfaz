@@ -1,15 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Restablecer Contraseña";
+    ViewData["Title"] = "Reestablecer Contraseña";
 }
 
-<h2>Restablecer Contraseña</h2>
+<h2>Reestablecer Contraseña</h2>
 
-<p>Ingrese su nueva contraseña.</p>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 
 <form method="post">
     <div class="form-group">
-        <label for="newPassword">Nueva Contraseña:</label>
-        <input type="password" id="newPassword" name="newPassword" class="form-control" required />
+        <label for="email">Escriba su email</label>
+        <input type="text" name="email" value="@ViewData["Email"]"/>
     </div>
-    <button type="submit" class="btn btn-primary">Restablecer</button>
+    <div class="form-group">
+        <label for="nuevaContraseña">Nueva Contraseña:</label>
+        <input type="password" id="nuevaContraseña" name="nuevaContraseña" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="confirmarContraseña">Confirmar Contraseña:</label>
+        <input type="password" id="confirmarContraseña" name="confirmarContraseña" class="form-control" required />
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
 </form>

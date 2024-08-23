@@ -1,7 +1,0 @@
-@ConexionApi_HostAddress = http://localhost:5105
-
-GET {{ConexionApi_HostAddress}}/ServiciosController/
-Accept: application/json
-
-###
-  

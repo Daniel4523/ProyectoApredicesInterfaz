@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    var rolUsuario = ViewBag.RolUsuario as string;
 }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Bienvenido</h1>
+
+    @if (rolUsuario == "Admin")
+    {
+        <a href="@Url.Action("AdminView", "Home")">
+            <button type="button" id="btnAdmin">Admin</button>
+        </a>
+        <a href="@Url.Action("VerificarView", "Home")">
+            <button type="button" id="btnVerificar">Verificar</button>
+        </a>
+        <a href="@Url.Action("LimpiarView", "Home")">
+            <button type="button" id="btnLimpiar">Limpiar</button>
+        </a>
+    }
+    else if (rolUsuario == "Verificar")
+    {
+        <a href="@Url.Action("VerificarView", "Home")">
+            <button type="button" id="btnVerificar">Verificar</button>
+        </a>
+    }
+    else if (rolUsuario == "Limpiar")
+    {
+        <a href="@Url.Action("LimpiarView", "Home")">
+            <button type="button" id="btnLimpiar">Limpiar</button>
+        </a>
+    }
+</body>
+
+</html>

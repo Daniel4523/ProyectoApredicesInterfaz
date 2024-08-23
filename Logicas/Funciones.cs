@@ -1,13 +1,9 @@
 ﻿using Conexiones;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Linq;
-using System.Net;
 using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Net;
+using System;
+
 
 namespace Proyecto.Logica
 {
@@ -15,6 +11,7 @@ namespace Proyecto.Logica
     {
         private readonly IMongoCollection<MongoConexion> _basedatos;
         private string codigoGenerado;
+
         public Funciones(IMongoClient client)
         {
             var database = client.GetDatabase("Proyecto");
@@ -49,6 +46,7 @@ namespace Proyecto.Logica
                 throw new Exception("Ocurrió un error al intentar acceder a la base de datos: " + ex.Message);
             }
         }
+
         public string GenerarCodigo()
         {
             Random random = new Random();
@@ -60,11 +58,8 @@ namespace Proyecto.Logica
         {
             try
             {
-
-                var uniqueCode = Guid.NewGuid().ToString();
-
-            
-                GuardarCodigoRecuperacion(email, uniqueCode);
+                var recoveryCode = GenerarCodigo(); 
+                GuardarCodigoRecuperacion(email, recoveryCode); 
 
                 var smtpClient = new SmtpClient("smtp.office365.com")
                 {
@@ -77,8 +72,8 @@ namespace Proyecto.Logica
                 {
                     From = new MailAddress("pruebasproyectoaprendices@outlook.com"),
                     Subject = "Recuperación de Contraseña",
-                    Body = $"Haz clic en el siguiente enlace para restablecer tu contraseña: <a href='http://localhost:5286/Home/ReestablecerContraseña?email={email}&code={uniqueCode}'>Restablecer Contraseña</a>",
-                    IsBodyHtml = true,
+                    Body = $"Tu código de recuperación es: {recoveryCode}",
+                    IsBodyHtml = false,
                 };
                 mailMessage.To.Add(email);
 
@@ -117,6 +112,40 @@ namespace Proyecto.Logica
             catch (Exception ex)
             {
                 throw new Exception("Ocurrió un error al guardar el código de recuperación: " + ex.Message);
+            }
+        }
+
+        public bool ValidarCodigoRecuperacion(string email, string codigo)
+        {
+            try
+            {
+                var filter = Builders<MongoConexion>.Filter.Eq("email", email) & Builders<MongoConexion>.Filter.Eq("recoveryCode", codigo);
+                var usuario = _basedatos.Find(filter).FirstOrDefault();
+
+                return usuario != null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error al validar el código de recuperación: " + ex.Message);
+            }
+        }
+        public bool CambiarContraseña(string email, string nuevaContraseña)
+        {
+            try
+            {
+                var filter = Builders<MongoConexion>.Filter.Eq("user", email);
+
+            
+                var update = Builders<MongoConexion>.Update.Set("psw", nuevaContraseña);
+
+             
+                var result = _basedatos.UpdateOne(filter, update);
+
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error al cambiar la contraseña: " + ex.Message);
             }
         }
     }

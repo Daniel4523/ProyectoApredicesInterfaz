@@ -6,7 +6,6 @@ namespace Conexiones
     public class MongoConexion
     {
 
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
@@ -19,6 +18,13 @@ namespace Conexiones
         [BsonElement("rol")]
         public string Rol { get; set; }
 
+        [BsonElement("recoveryCode")]
+        public string RecoveryCode { get; set; }
 
+        [BsonElement("email")] // Este campo es necesario si se usa en consultas
+        public string Email { get; set; }
+
+        [BsonElement("isConfirmed")] // Campo adicional si estás confirmando emails
+        public bool IsConfirmed { get; set; }
     }
 }
