@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using System.Net.Mail;
 using System.Net;
 using System;
+using System.Collections.Generic;
 
 
 namespace Proyecto.Logica
@@ -146,6 +147,58 @@ namespace Proyecto.Logica
             catch (Exception ex)
             {
                 throw new Exception("Ocurrió un error al cambiar la contraseña: " + ex.Message);
+            }
+        }
+        public bool AgregarUsuario(string email, string password, string rol)
+        {
+            try
+            {
+                var usuario = new MongoConexion
+                {
+                    User = email,
+                    Psw = password,
+                    Email = email,
+                    IsConfirmed = false,
+                    Rol = rol // Asignar el rol seleccionado
+                };
+
+                _basedatos.InsertOne(usuario);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar el usuario: " + ex.Message);
+            }
+        }
+
+        public List<MongoConexion> ObtenerUsuarios()
+        {
+            try
+            {
+                return _basedatos.Find(_ => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la lista de usuarios: " + ex.Message);
+            }
+        }
+
+        public bool EliminarUsuario(string email)
+        {
+            try
+            {
+                var usuario = _basedatos.Find(x => x.Email == email).FirstOrDefault();
+                if (usuario == null || usuario.Rol == "Admin")
+                {
+                    return false;
+                }
+
+                var result = _basedatos.DeleteOne(x => x.Email == email);
+                return result.DeletedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el usuario: " + ex.Message);
             }
         }
     }

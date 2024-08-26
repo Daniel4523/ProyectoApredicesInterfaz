@@ -155,6 +155,8 @@ namespace Proyecto.Controllers
 
         public IActionResult AdminView()
         {
+            var usuarios = _funciones.ObtenerUsuarios();
+            ViewBag.Usuarios = usuarios;
             return View();
         }
 
@@ -185,6 +187,58 @@ namespace Proyecto.Controllers
 
             return View("VerificarView");
         }
+        [HttpPost]
+        public IActionResult AgregarUsuario(string email, string password, string rol)
+        {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(rol))
+            {
+                TempData["ErrorMessage"] = "Todos los campos son obligatorios.";
+                return RedirectToAction("AdminView");
+            }
 
+            try
+            {
+                
+                bool userAdded = _funciones.AgregarUsuario(email, password, rol);
+                if (userAdded)
+                {
+                    TempData["SuccessMessage"] = "Usuario agregado exitosamente.";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "No se pudo agregar el usuario. Por favor, inténtelo nuevamente.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Ocurrió un error al agregar el usuario: " + ex.Message;
+            }
+
+            return RedirectToAction("AdminView");
+        }
+
+        [HttpPost]
+        public IActionResult EliminarUsuario(string email)
+        {
+            try
+            {
+            
+                bool userDeleted = _funciones.EliminarUsuario(email);
+                if (userDeleted)
+                {
+                    TempData["SuccessMessage"] = "Usuario eliminado exitosamente.";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "No se pudo eliminar el usuario. El usuario es un administrador o no existe.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Ocurrió un error al eliminar el usuario: " + ex.Message;
+            }
+
+            return RedirectToAction("AdminView");
+        }
     }
 }
