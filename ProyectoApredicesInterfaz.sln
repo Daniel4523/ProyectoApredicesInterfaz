@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logicas", "Logicas\Logicas.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imagenes", "imagenes", "{2E9C90D8-5666-4360-8A2E-E40AE9D5D41E}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\56b3ac6083105.jpeg = ..\..\..\Downloads\56b3ac6083105.jpeg
 		Imagenes\administracion.png = Imagenes\administracion.png
 		Imagenes\atencion-al-cliente.png = Imagenes\atencion-al-cliente.png
 		Imagenes\bbuscar.png = Imagenes\bbuscar.png
