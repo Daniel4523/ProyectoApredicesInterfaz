@@ -22,12 +22,15 @@
 
 @if (TempData["CodeSent"] != null)
 {
-    <form method="post" action="/Home/ConfirmarCodigo">
+        <form method="post" action="/Home/ConfirmarCodigo" class="form-container">
         <div class="form-group">
             <label for="recoveryCode">Código de Recuperación:</label>
+            <br />
             <input type="text" id="recoveryCode" name="recoveryCode" class="form-control" required />
+            <br />
         </div>
         <input type="hidden" name="email" value="@TempData["Email"]" />
+        <br />
         <button type="submit" class="btn btn-primary">Confirmar Código</button>
     </form>
 }

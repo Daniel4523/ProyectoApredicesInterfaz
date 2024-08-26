@@ -7,20 +7,27 @@
 
 <h2>Verificar</h2>
 
-<form asp-action="ObtenerDatos" method="post">
+<form asp-action="ObtenerDatos" method="post" class="form-container">
     <div>
         <label for="cuentaServicioId">Cuenta Servicio ID:</label>
+        <br />
         <input type="text" id="cuentaServicioId" name="cuentaServicioId" />
     </div>
     <div>
+         <br />
         <label for="tipoServicio">Tipo de Servicio:</label>
+         <br />
         <input type="text" id="tipoServicio" name="tipoServicio" />
     </div>
     <div>
+         <br />
         <label for="estadoServicio">Estado del Servicio:</label>
+         <br />
         <input type="text" id="estadoServicio" name="estadoServicio" />
     </div>
-    <button type="submit">Buscar</button>
+    <br />
+    <br />
+    <button type="submit" class="btn-primary">Buscar</button>
 </form>
 
 @if (resultado != null && resultado.Any())

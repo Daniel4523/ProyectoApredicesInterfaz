@@ -18,17 +18,22 @@
     </div>
 }
 
-<form method="post">
+<form method="post" class="form-container">
     <div class="form-group">
         <label for="email">Escriba su email</label>
+        <br />
         <input type="text" name="email" value="@ViewData["Email"]"/>
+        <br />
     </div>
     <div class="form-group">
         <label for="nuevaContraseña">Nueva Contraseña:</label>
+        <br />
         <input type="password" id="nuevaContraseña" name="nuevaContraseña" class="form-control" required />
     </div>
     <div class="form-group">
+        <br />
         <label for="confirmarContraseña">Confirmar Contraseña:</label>
+        <br />
         <input type="password" id="confirmarContraseña" name="confirmarContraseña" class="form-control" required />
     </div>
     

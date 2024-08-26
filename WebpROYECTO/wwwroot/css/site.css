@@ -17,6 +17,57 @@ html {
   min-height: 100%;
 }
 
+h1 {
+    color: #000000; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    padding: 20px; /* Espacio interno alrededor del texto */
+    font-size: 100px; /* Tamaño del texto */
+    margin-bottom: 40px; /* Espacio debajo del h1 */
+}
+
 body {
-  margin-bottom: 60px;
+    background-image: url('../img/ff.jpg'); /* Ruta de la imagen de fondo */
+    background-position: center; /* Centra la imagen en el h1 */
+    background-repeat: no-repeat; /* No repite la imagen */
+    background-color: #e1edfa; /* Fondo negro para el cuerpo */
+    color: #000000; /* Letras blancas en el cuerpo */
+    font-family: Arial, sans-serif; /* Tipografía básica */
+    padding: 20px;
+    margin: 0;
+}
+
+.btn-primary {
+    background-color: #ff5631; /* Color del botón */
+    color: #ffffff; /* Color del texto del botón */
+    border-color: #1861ac;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #e04a28; /* Color al pasar el ratón por encima */
+    }
+form {
+    max-width: 500px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    background-color: white; /* Fondo blanco para el formulario */
+    padding: 30px; /* Espacio interno alrededor del formulario */
+    border-radius: 8px; /* Bordes redondeados */
+}
+.form-container {
+    max-width: 500px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    background-color: white; /* Fondo blanco para el formulario */
+    padding: 30px; /* Espacio interno alrededor del formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    display: flex;
+    justify-content: center;
+}
+.img-inicio {
+    width: 100px; /* Ancho de la imagen */
+    height: auto; /* Mantener la proporción de la imagen */
 }
