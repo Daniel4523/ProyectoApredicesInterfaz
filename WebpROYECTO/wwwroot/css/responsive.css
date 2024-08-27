@@ -3,59 +3,65 @@
         font-size: 16px;
     }
 }
-
-@media (max-width: 767px) {
-    h1 {
-        font-size: 48px;
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn-primary {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .img-inicio {
-        width: 80%;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 36px;
-    }
-
-    .img-inicio {
-        width: 80%;
-    }
-
-    .btn-primary {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
 @media (max-width: 768px) {
-    .table-centered {
-        border-spacing: 10px 5px; /* Reduce el espacio entre las celdas en pantallas pequeñas */
+    .form-container {
+        padding: 20px;
+        max-width: 100%;
+        margin: 20px;
     }
 
-        .table-centered tr {
-            display: flex;
+    @media (max-width: 767px) {
+        h1 {
+            font-size: 48px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .container {
             flex-direction: column;
             align-items: center;
         }
 
-        .table-centered td {
+        .btn-primary {
             width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px; /* Espacio entre cada conjunto de imagen y botón */
+            margin-top: 10px;
         }
 
-}
+        .img-inicio {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 36px;
+        }
+
+        .img-inicio {
+            width: 80%;
+        }
+
+        .btn-primary {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .table-centered {
+            border-spacing: 10px 5px; /* Reduce el espacio entre las celdas en pantallas pequeñas */
+        }
+
+            .table-centered tr {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .table-centered td {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px; /* Espacio entre cada conjunto de imagen y botón */
+            }
+    }

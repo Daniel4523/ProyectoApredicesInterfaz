@@ -15,18 +15,27 @@
 
     @if (rolUsuario == "Admin")
     {
-        <div class="container">
+        <div class="container-inicio">
             <a href="@Url.Action("AdminView", "Home")">
-                <img src="../img/adm.png" alt="administrador" class="img-inicio">
-                <button type="button" id="btnAdmin" class="btn btn-primary">Admin</button>
+                <button type="button" id="btnAdmin" class="btn-inicio">
+                    <img src="../img/adm.png" alt="administrador" class="img-inicio">
+                    <br />
+                    <h3>Admin</h3>
+                </button>
             </a>
             <a href="@Url.Action("VerificarView", "Home")">
-                <img src="../img/ver.png" alt="verificacion" class="img-inicio"> 
-                <button type="button" id="btnVerificar" class="btn btn-primary">Verificar</button>
+                <button type="button" id="btnVerificar" class="btn-inicio">
+                    <img src="../img/ver.png" alt="verificacion" class="img-inicio">
+                    <br />
+                    <h3>Verificar</h3>
+                </button>
             </a>
             <a href="@Url.Action("LimpiarView", "Home")">
-                <img src="../img/lim.png" alt="limpieza" class="img-inicio"> 
-                <button type="button" id="btnLimpiar" class="btn btn-primary">Limpiar</button>
+                <button type="button" id="btnLimpiar" class="btn-inicio">
+                    <img src="../img/lim.png" alt="limpieza" class="img-inicio">
+                    <br />
+                    <h3>Limpiar</h3>
+                </button>
             </a>
         </div>
     }
