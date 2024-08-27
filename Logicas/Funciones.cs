@@ -159,7 +159,7 @@ namespace Proyecto.Logica
                     Psw = password,
                     Email = email,
                     IsConfirmed = false,
-                    Rol = rol // Asignar el rol seleccionado
+                    Rol = rol 
                 };
 
                 _basedatos.InsertOne(usuario);

@@ -8,29 +8,21 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
 }
-
-@if (TempData["ErrorMessage"] != null)
+else if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
 
 @if (TempData["CodeSent"] != null)
 {
-        <form method="post" action="/Home/ConfirmarCodigo" class="form-container">
+    <form method="post" action="/Home/ConfirmarCodigo" class="form-container">
         <div class="form-group">
             <label for="recoveryCode">Código de Recuperación:</label>
-            <br />
             <input type="text" id="recoveryCode" name="recoveryCode" class="form-control" required />
-            <br />
         </div>
         <input type="hidden" name="email" value="@TempData["Email"]" />
-        <br />
         <button type="submit" class="btn btn-primary">Confirmar Código</button>
     </form>
 }

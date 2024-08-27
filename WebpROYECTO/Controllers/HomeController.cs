@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson.IO;
+using Microsoft.AspNetCore.Http;
 using Proyecto.Logica;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WebFront.Models;
-using Newtonsoft;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Proyecto.Controllers
 {
@@ -47,35 +49,6 @@ namespace Proyecto.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult ConfirmarCodigo(string email, string recoveryCode)
-        {
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(recoveryCode))
-            {
-                TempData["ErrorMessage"] = "Por favor, ingrese un código de recuperación válido.";
-                return RedirectToAction("OlvideMiContraseña");
-            }
-
-            try
-            {
-                var isCodeValid = _funciones.ValidarCodigoRecuperacion(email, recoveryCode);
-                if (isCodeValid)
-                {
-                    return RedirectToAction("ReestablecerContraseña", new { email = email });
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Código de recuperación inválido.";
-                    return RedirectToAction("OlvideMiContraseña");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Ocurrió un error: " + ex.Message;
-                return RedirectToAction("OlvideMiContraseña");
-            }
-        }
-
         public IActionResult Inicio()
         {
             string rolUsuario = HttpContext.Session.GetString("RolUsuario");
@@ -112,9 +85,39 @@ namespace Proyecto.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ConfirmarCodigo(string email, string recoveryCode)
+        {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(recoveryCode))
+            {
+                TempData["ErrorMessage"] = "Por favor, ingrese un código de recuperación válido.";
+                return RedirectToAction("OlvideMiContraseña");
+            }
+
+            try
+            {
+                var isCodeValid = _funciones.ValidarCodigoRecuperacion(email, recoveryCode);
+                if (isCodeValid)
+                {
+                    return RedirectToAction("ReestablecerContraseña", new { email = email });
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Código de recuperación inválido.";
+                    return RedirectToAction("OlvideMiContraseña");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Ocurrió un error: " + ex.Message;
+                return RedirectToAction("OlvideMiContraseña");
+            }
+        }
+
         public IActionResult ReestablecerContraseña(string email)
         {
-            return View(new { Email = email });
+            ViewData["Email"] = email;
+            return View();
         }
 
         [HttpPost]
@@ -123,13 +126,15 @@ namespace Proyecto.Controllers
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(nuevaContraseña) || string.IsNullOrWhiteSpace(confirmarContraseña))
             {
                 TempData["ErrorMessage"] = "Todos los campos son obligatorios.";
-                return View(new { Email = email });
+                ViewData["Email"] = email;
+                return View();
             }
 
             if (nuevaContraseña != confirmarContraseña)
             {
                 TempData["ErrorMessage"] = "Las contraseñas no coinciden.";
-                return View(new { Email = email });
+                ViewData["Email"] = email;
+                return View();
             }
 
             try
@@ -150,7 +155,8 @@ namespace Proyecto.Controllers
                 TempData["ErrorMessage"] = "Ocurrió un error: " + ex.Message;
             }
 
-            return View(new { Email = email });
+            ViewData["Email"] = email;
+            return View();
         }
 
         public IActionResult AdminView()
@@ -164,7 +170,10 @@ namespace Proyecto.Controllers
         {
             return View();
         }
-        [HttpPost]
+        public IActionResult LimpiarView()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> ObtenerDatos(string cuentaServicioId, string tipoServicio, string estadoServicio)
         {
@@ -174,7 +183,7 @@ namespace Proyecto.Controllers
             try
             {
                 var response = await _httpClient.GetStringAsync(apiUrl);
-                resultado = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CuentaServicio>>(response);
+                resultado = JsonConvert.DeserializeObject<List<CuentaServicio>>(response);
             }
             catch (Exception ex)
             {
@@ -182,11 +191,10 @@ namespace Proyecto.Controllers
                 resultado = new List<CuentaServicio>();
             }
 
-           
             ViewBag.Resultado = resultado;
-
             return View("VerificarView");
         }
+
         [HttpPost]
         public IActionResult AgregarUsuario(string email, string password, string rol)
         {
@@ -198,7 +206,6 @@ namespace Proyecto.Controllers
 
             try
             {
-                
                 bool userAdded = _funciones.AgregarUsuario(email, password, rol);
                 if (userAdded)
                 {
@@ -222,7 +229,6 @@ namespace Proyecto.Controllers
         {
             try
             {
-            
                 bool userDeleted = _funciones.EliminarUsuario(email);
                 if (userDeleted)
                 {
