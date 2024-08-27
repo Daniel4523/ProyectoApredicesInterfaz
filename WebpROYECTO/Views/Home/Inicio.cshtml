@@ -3,41 +3,46 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <h1>Bienvenido</h1>
 
     @if (rolUsuario == "Admin")
     {
-          
-        <a href="@Url.Action("AdminView", "Home")">
-            <img src="../img/adm.png" alt="administrador" class="img-inicio" >
-            <button type="button" id="btnAdmin" class="btn btn-primary">Admin</button>
-        </a>
-        <a href="@Url.Action("VerificarView", "Home")">
-                 <img src="../img/ver.png" alt="verificacion" class="img-inicio"> 
+        <div class="container">
+            <a href="@Url.Action("AdminView", "Home")">
+                <img src="../img/adm.png" alt="administrador" class="img-inicio">
+                <button type="button" id="btnAdmin" class="btn btn-primary">Admin</button>
+            </a>
+            <a href="@Url.Action("VerificarView", "Home")">
+                <img src="../img/ver.png" alt="verificacion" class="img-inicio"> 
                 <button type="button" id="btnVerificar" class="btn btn-primary">Verificar</button>
-        </a>
-        <a href="@Url.Action("LimpiarView", "Home")">
-             <img src="../img/lim.png" alt="limpieza" class="img-inicio"> 
-            <button type="button" id="btnLimpiar" class="btn btn-primary">Limpiar</button>
-        </a>
+            </a>
+            <a href="@Url.Action("LimpiarView", "Home")">
+                <img src="../img/lim.png" alt="limpieza" class="img-inicio"> 
+                <button type="button" id="btnLimpiar" class="btn btn-primary">Limpiar</button>
+            </a>
+        </div>
     }
     else if (rolUsuario == "Verificar")
     {
         <a href="@Url.Action("VerificarView", "Home")">
+            <img src="../img/ver.png" alt="verificacion" class="img-inicio">
             <button type="button" id="btnVerificar" class="btn btn-primary">Verificar</button>
         </a>
     }
     else if (rolUsuario == "Limpiar")
     {
         <a href="@Url.Action("LimpiarView", "Home")">
-            <button type="button" id="btnLimpiar" class="btn btn-primary"class="btn btn-primary">Limpiar</button>
+            <img src="../img/lim.png" alt="limpieza" class="img-inicio">
+            <button type="button" id="btnLimpiar" class="btn btn-primary">Limpiar</button>
         </a>
     }
 </body>
-
 </html>
