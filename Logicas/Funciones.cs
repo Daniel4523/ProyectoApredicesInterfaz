@@ -25,8 +25,8 @@ namespace Proyecto.Logica
 
             try
             {
-                var filter = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaIngresada);
-                var usuario = _basedatos.Find(filter).FirstOrDefault();
+                var filtro = Builders<MongoConexion>.Filter.Eq("user", usuarioIngresado) & Builders<MongoConexion>.Filter.Eq("psw", contraseñaIngresada);
+                var usuario = _basedatos.Find(filtro).FirstOrDefault();
 
                 if (usuario != null)
                 {
@@ -69,16 +69,16 @@ namespace Proyecto.Logica
                     EnableSsl = true,
                 };
 
-                var mailMessage = new MailMessage
+                var Mensaje = new MailMessage
                 {
                     From = new MailAddress("pruebasproyectoaprendices@outlook.com"),
                     Subject = "Recuperación de Contraseña",
                     Body = $"Tu código de recuperación es: {recoveryCode}",
                     IsBodyHtml = false,
                 };
-                mailMessage.To.Add(email);
+                Mensaje.To.Add(email);
 
-                smtpClient.Send(mailMessage);
+                smtpClient.Send(Mensaje);
                 return true;
             }
             catch (Exception ex)

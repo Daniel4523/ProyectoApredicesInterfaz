@@ -206,8 +206,8 @@ namespace Proyecto.Controllers
 
             try
             {
-                bool userAdded = _funciones.AgregarUsuario(email, password, rol);
-                if (userAdded)
+                bool AñadirUsuario = _funciones.AgregarUsuario(email, password, rol);
+                if (AñadirUsuario)
                 {
                     TempData["SuccessMessage"] = "Usuario agregado exitosamente.";
                 }
@@ -229,8 +229,8 @@ namespace Proyecto.Controllers
         {
             try
             {
-                bool userDeleted = _funciones.EliminarUsuario(email);
-                if (userDeleted)
+                bool eliminarUsuario = _funciones.EliminarUsuario(email);
+                if (eliminarUsuario)
                 {
                     TempData["SuccessMessage"] = "Usuario eliminado exitosamente.";
                 }
